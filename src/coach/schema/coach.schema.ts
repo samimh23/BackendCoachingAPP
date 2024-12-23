@@ -18,8 +18,11 @@ export class Coach extends Document {
   @Prop()
   experience: string;
 
-  @Prop({ required: true })
+  @Prop()
   specialization: string;
+
+  @Prop()
+  certifacate: string;
 
   @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })
   clients: Types.ObjectId[];

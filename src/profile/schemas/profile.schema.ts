@@ -18,6 +18,9 @@ export class Profile extends Document {
 
   @Prop({ default: Date.now })
   createdAt: Date;
+
+  @Prop({ default: null })
+  profilePicture: string; 
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(Profile);

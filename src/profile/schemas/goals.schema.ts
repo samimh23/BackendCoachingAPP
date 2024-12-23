@@ -15,6 +15,13 @@ export class Goals extends Document {
   dailyWaterIntake: number; // in liters
 
   @Prop({ required: true })
+  targetweight: number; // in kg
+  
+  @Prop({ required: true })
+  targetcalories: number; // in kcal
+
+
+  @Prop({ required: true })
   dailySleepGoal: number; // in hours
 }
 
