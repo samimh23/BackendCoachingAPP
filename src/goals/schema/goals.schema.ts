@@ -22,7 +22,7 @@ export class Goal extends Document {
 
   @Prop({ 
     type: String,
-    enum: ['weight_loss', 'muscle_gain', 'endurance', 'flexibility', 'strength', 'general_fitness', 'other'],
+    enum: ['weight_loss', 'muscle_gain', 'endurance', 'strength', 'other'],
     required: true 
   })
   category: string;

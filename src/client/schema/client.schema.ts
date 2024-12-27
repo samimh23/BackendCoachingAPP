@@ -29,51 +29,12 @@ export class Client extends BaseUser {
   @Prop()
   phoneNumber?: string;
 
-  // Initial Physical Measurements
-  @Prop({
-    type: {
-      weight: Number,
-      height: Number,
-      bodyFatPercentage: Number,
-      date: { type: Date, default: Date.now }
-    }
-  })
-  initialMeasurements?: Record<string, any>;
-
   // References to other schemas
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Goal' }] })
   goals?: MongooseSchema.Types.ObjectId[];
 
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Progress' }] })
   progressRecords?: MongooseSchema.Types.ObjectId[];
-
-  // Fitness Profile
-  @Prop({
-    type: String,
-    enum: ['beginner', 'intermediate', 'advanced', 'professional'],
-    default: 'beginner'
-  })
-  fitnessLevel?: string;
-
-  @Prop({ type: [String] })
-  healthConditions?: string[];
-
-  @Prop({ type: [String] })
-  injuries?: string[];
-
-  // Training Preferences
-  @Prop({ type: [{ 
-    day: { type: String, enum: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] },
-    startTime: String,
-    endTime: String,
-    available: { type: Boolean, default: true }
-  }] })
-  availability?: Record<string, any>[];
-
-  @Prop({ type: [String], 
-    enum: ['strength', 'cardio', 'flexibility', 'hiit', 'yoga', 'crossfit', 'other'] 
-  })
-  preferredWorkoutTypes?: string[];
 
   // Coaching Relationship
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Coach' })
@@ -91,7 +52,7 @@ export class Client extends BaseUser {
       }
     }
   })
-  subscription?: Record<string, any>;
+  subscription?: Record<string, any>;// for a seperate schema
 
   // Communication Settings
   @Prop({
@@ -99,32 +60,10 @@ export class Client extends BaseUser {
       email: { type: Boolean, default: true },
       sms: { type: Boolean, default: true },
       pushNotifications: { type: Boolean, default: true },
-      language: { type: String, default: 'en' }
+      inAppMessages: { type: Boolean, default: true }
     }
   })
   communicationPreferences?: Record<string, any>;
-
-  // Nutrition Information
-  @Prop({
-    type: {
-      dietaryRestrictions: [String],
-      foodAllergies: [String],
-      dailyCalorieTarget: Number,
-      mealPreferences: [String]
-    }
-  })
-  nutritionInfo?: Record<string, any>;
-
-  // Emergency Contact
-  @Prop({
-    type: {
-      name: String,
-      relationship: String,
-      phoneNumber: String,
-      email: String
-    }
-  })
-  emergencyContact?: Record<string, any>;
 
   // Account Status
   @Prop({

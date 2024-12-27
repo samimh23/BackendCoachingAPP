@@ -37,8 +37,8 @@ export class Coach extends BaseUser {
   @Prop()
   hourlyRate?: number;
 
-  @Prop()
-  availability?: string;
+  @Prop({default: false}) 
+  availability?: boolean;
 
   @Prop({ type: Object })
   workingHours: {
