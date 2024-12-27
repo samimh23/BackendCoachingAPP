@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { RegisterDto } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('signup')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({ summary: 'Register a new user' })
+  @ApiResponse({ 
+    status: 201, 
+    description: 'User successfully created' 
+  })
+  @ApiResponse({ 
+    status: 409, 
+    description: 'Email already exists' 
+  })
+  @ApiResponse({ 
+    status: 400, 
+    description: 'Invalid input data' 
+  })
+  async signup(@Body() registerDto: RegisterDto) {
+    return await this.authService.signup(registerDto);
   }
 
   @Get()
@@ -22,10 +36,6 @@ export class AuthController {
     return this.authService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

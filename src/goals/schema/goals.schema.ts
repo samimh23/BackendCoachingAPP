@@ -41,17 +41,10 @@ export class Goal extends Document {
   targetValue?: number;
 
   @Prop()
-  currentValue?: number;
-
-  @Prop()
   startValue?: number;
 
-  @Prop({ type: [{ 
-    date: Date,
-    value: Number,
-    note: String
-  }] })
-  progressUpdates?: Record<string, any>[];
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Progress' }] })
+  progressUpdates?: MongooseSchema.Types.ObjectId[];
 
   @Prop()
   completedDate?: Date;
