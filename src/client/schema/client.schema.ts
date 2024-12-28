@@ -77,7 +77,7 @@ export class Client extends BaseUser {
 export const ClientSchema = SchemaFactory.createForClass(Client);
 
 // Enhanced indexes for better query performance
-ClientSchema.index({ email: 1 }, { unique: true });
+
 ClientSchema.index({ coach: 1 });
 ClientSchema.index({ 'subscription.status': 1 });
 ClientSchema.index({ accountStatus: 1 });
